@@ -1,0 +1,25 @@
+@startuml
+interface Subscriber {
+ +update(news: String): void
+}
+
+class NewsAgency {
+ -subscribers: List<Subscriber>
+
+ +subscribe(subscriber: Subscriber): void
+ +unsubscribe(subscriber: Subscriber): void
+ +notifySubscribers(news: String): void
+}
+
+class NewsChannel {
+ +update(news: String): void
+}
+
+class MobileApp {
+ +update(news: String): void
+}
+
+NewsChannel --|> Subscriber
+MobileApp --|> Subscriber
+NewsAgency o-- "1..*" Subscriber
+@enduml
